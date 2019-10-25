@@ -1,15 +1,10 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :picture_for]
+  before_action :set_image, only: [:picture_for]
 
   # GET /images
   # GET /images.json
   def index
     @images = Image.all
-  end
-
-  # GET /images/1
-  # GET /images/1.json
-  def show
   end
 
   # GET /images/new
@@ -26,8 +21,8 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
+        format.html { redirect_to images_path, success: 'Image was successfully created.' }
+        format.json { render :show, status: :created, location: images_path }
       else
         format.html { render :new }
         format.json { render json: @image.errors, status: :unprocessable_entity }
