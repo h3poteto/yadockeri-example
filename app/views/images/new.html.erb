@@ -1,0 +1,7 @@
+<%= form_for(@image) do |f| %>
+  <div class="form-group">
+    <%= @image.name %>
+    <%= f.file_field :picture %>
+    <%= f.submit "画像を投稿する" %>
+  </div>
+<% end %>
