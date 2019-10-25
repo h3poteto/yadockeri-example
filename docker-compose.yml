@@ -1,0 +1,25 @@
+version: '3.0'
+
+services:
+  app:
+    image: h3poteto/rails-node:2.6.3-node10-slim-buster
+    working_dir: /var/opt/app
+    environment:
+      BUNDLE_APP_CONFIG: /var/opt/app/.bundle
+      DB_HOST: postgres
+      DB_USERNAME: master
+      DB_PASSWORD: docker
+    volumes:
+      - .:/var/opt/app
+    links:
+      - postgres:postgres
+    ports:
+      - "3000:3000"
+
+
+  postgres:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: master
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: yadockeri_example_dev

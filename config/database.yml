@@ -17,13 +17,15 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  host: <%= ENV.fetch("DB_HOST") { 'postgres' } %>
+  username: <%= ENV.fetch("DB_USERNAME") { 'master' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { 'docker' } %>
+  port: 5432
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: yadockeri_example_development
+  database: yadockeri_example_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
