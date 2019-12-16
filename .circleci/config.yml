@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: |
+            docker build -t h3poteto/yadockeri-example:$CIRCLE_SHA1 .
+
+  create_latest_image:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Docker build
+          command: |
+            docker build -t h3poteto/yadockeri-example:latest .
+      - run:
+          name: push
+          command: |
+            docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
+            docker push h3poteto/yadockeri-example:latest
+
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - build
+      - create_latest_image:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
