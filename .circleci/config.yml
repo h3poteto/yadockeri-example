@@ -28,11 +28,12 @@ workflows:
   version: 2
   build_and_push:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: master
       - create_latest_image:
           filters:
             branches:
               only:
                 - master
-          requires:
-            - build
