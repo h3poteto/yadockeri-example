@@ -82,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: yadockeri_example_production
-  username: yadockeri_example
-  password: <%= ENV['YADOCKERI_EXAMPLE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
