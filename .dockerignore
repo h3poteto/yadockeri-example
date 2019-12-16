@@ -1,4 +1,6 @@
-tmp/*
+tmp/cache/*
+tmp/pids/*
+tmp/sockets/*
 vendor/*
 log/*
 .git
